@@ -1,2 +1,0 @@
-# Studyfocus
-Hi 👋 
