@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Focused</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            transition: background 0.3s, color 0.3s;
+        }
+        h1 {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .timer {
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .warning {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-style: italic;
+            color: red;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .toggle-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            background-color: black;
+            color: white;
+            border-radius: 5px;
+        }
+        .dark-mode .toggle-btn {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>What are you doing, Shubham? <br>Remember who you are. <br>Remember what you're capable of. <br>Prove it. Grind.</h1>
+
+    <div id="countdown2025" class="timer"></div>
+    <div id="countdown2026" class="timer"></div>
+
+    <p class="warning">Every 2.4 minutes wasted = 1 JEE Mains question you could have solved.</p>
+    <p class="warning">An hour wasted can push your rank down by 100+ spots.</p>
+    <p class="warning">JEE is a war. The more time you waste, the stronger your competition gets.</p>
+
+    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <script>
+        function updateCountdown(id, targetDate) {
+            function calculate() {
+                const now = new Date().getTime();
+                const timeLeft = targetDate - now;
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById(id).innerHTML = `${id.includes("2025") ? "JEE 2025" : "JEE 2026"} in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                setTimeout(calculate, 1000);
+            }
+            calculate();
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        function autoSetTheme() {
+            const hour = new Date().getHours();
+            if (hour >= 5 && hour < 17) {
+                document.body.classList.remove("dark-mode"); // Light Mode (5 AM - 5 PM)
+            } else {
+                document.body.classList.add("dark-mode"); // Dark Mode (5 PM - 5 AM)
+            }
+        }
+
+        updateCountdown("countdown2025", new Date("2025-04-01T00:00:00").getTime());
+        updateCountdown("countdown2026", new Date("2026-01-22T00:00:00").getTime());
+        autoSetTheme(); // Set theme on load
+    </script>
+</body>
+</html>
