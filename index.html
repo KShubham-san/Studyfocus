@@ -3,96 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stay Focused</title>
+    <title>Study Focus</title>
     <style>
         body {
-            background-color: white;
-            color: black;
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 50px;
-            transition: background 0.3s, color 0.3s;
-        }
-        h1 {
-            font-size: 2em;
-            font-weight: bold;
-        }
-        .timer {
-            font-size: 1.5em;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        .warning {
-            margin-top: 20px;
-            font-size: 1.2em;
-            font-style: italic;
-            color: red;
-        }
-        .dark-mode {
-            background-color: #121212;
-            color: white;
-        }
-        .toggle-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            border: none;
-            background-color: black;
-            color: white;
-            border-radius: 5px;
-        }
-        .dark-mode .toggle-btn {
+            margin: 0;
+            padding: 0;
             background-color: white;
             color: black;
+        }
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid black;
+            margin: 0 5px;
+            background-color: lightgray;
+        }
+        .tab.active {
+            background-color: gray;
+            color: white;
+        }
+        .content {
+            display: none;
+            padding: 20px;
+        }
+        .content.active {
+            display: block;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: black;
+                color: white;
+            }
+            .tab {
+                background-color: darkgray;
+                color: black;
+            }
+            .tab.active {
+                background-color: white;
+                color: black;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>What are you doing, Shubham? <br>Remember who you are. <br>Remember what you're capable of. <br>Prove it. Grind.</h1>
 
-    <div id="countdown2025" class="timer"></div>
-    <div id="countdown2026" class="timer"></div>
+    <h1>What are you doing, Shubham? Remember who you are. Show everyone. Grind.</h1>
 
-    <p class="warning">Every 2.4 minutes wasted = 1 JEE Mains question you could have solved.</p>
-    <p class="warning">An hour wasted can push your rank down by 100+ spots.</p>
-    <p class="warning">JEE is a war. The more time you waste, the stronger your competition gets.</p>
+    <div class="tab-container">
+        <div class="tab active" onclick="openTab('home')">Home</div>
+        <div class="tab" onclick="openTab('focus')">Focus Mode</div>
+        <div class="tab" onclick="openTab('motivation')">Motivation</div>
+        <div class="tab" onclick="openTab('progress')">Progress</div>
+    </div>
 
-    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <div id="home" class="content active">
+        <h2>JEE Countdown</h2>
+        <p>Time left for JEE 2025: <span id="jee2025"></span></p>
+        <p>Time left for JEE 2026: <span id="jee2026"></span></p>
+        <p>Every 2.4 minutes wasted = 1 question lost.</p>
+    </div>
+
+    <div id="focus" class="content">
+        <h2>Focus Mode</h2>
+        <p>Pomodoro timer and task list coming soon.</p>
+    </div>
+
+    <div id="motivation" class="content">
+        <h2>Motivation</h2>
+        <p>Random quotes and memes coming soon.</p>
+    </div>
+
+    <div id="progress" class="content">
+        <h2>Progress Tracker</h2>
+        <p>Mock test counter and mistake log coming soon.</p>
+    </div>
 
     <script>
-        function updateCountdown(id, targetDate) {
-            function calculate() {
-                const now = new Date().getTime();
-                const timeLeft = targetDate - now;
+        function openTab(tabName) {
+            var contents = document.querySelectorAll(".content");
+            var tabs = document.querySelectorAll(".tab");
 
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            contents.forEach(content => {
+                content.classList.remove("active");
+            });
+            tabs.forEach(tab => {
+                tab.classList.remove("active");
+            });
 
-                document.getElementById(id).innerHTML = `${id.includes("2025") ? "JEE 2025" : "JEE 2026"} in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-                setTimeout(calculate, 1000);
-            }
-            calculate();
+            document.getElementById(tabName).classList.add("active");
+            event.target.classList.add("active");
         }
 
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
+        function updateCountdown() {
+            const jee2025Date = new Date('2025-04-01T00:00:00').getTime();
+            const jee2026Date = new Date('2026-01-22T00:00:00').getTime();
+            const now = new Date().getTime();
+
+            document.getElementById('jee2025').innerText = Math.floor((jee2025Date - now) / (1000 * 60 * 60 * 24)) + " days";
+            document.getElementById('jee2026').innerText = Math.floor((jee2026Date - now) / (1000 * 60 * 60 * 24)) + " days";
         }
 
-        function autoSetTheme() {
-            const hour = new Date().getHours();
-            if (hour >= 5 && hour < 17) {
-                document.body.classList.remove("dark-mode"); // Light Mode (5 AM - 5 PM)
-            } else {
-                document.body.classList.add("dark-mode"); // Dark Mode (5 PM - 5 AM)
-            }
-        }
-
-        updateCountdown("countdown2025", new Date("2025-04-01T00:00:00").getTime());
-        updateCountdown("countdown2026", new Date("2026-01-22T00:00:00").getTime());
-        autoSetTheme(); // Set theme on load
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
+
 </body>
 </html>
