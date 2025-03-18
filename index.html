@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Focused</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: white;
+            color: black;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 50px;
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-in-out forwards;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+
+        /* Timer Styling */
+        .timer {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ff5733;
+            text-shadow: 2px 2px 8px rgba(255, 87, 51, 0.5);
+            margin-top: 20px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 80%;
+            max-width: 600px;
+            height: 15px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #ff5733, #ff914d);
+            transition: width 1s ease-in-out;
+        }
+
+        /* Warning Messages (Fixed Styling) */
+        .warning {
+            margin-top: 10px;
+            font-size: 1.2em;
+            font-style: italic;
+            color: red;
+            text-shadow: 1px 1px 5px rgba(255, 0, 0, 0.5);
+        }
+
+        /* Sidebar */
+        .menu-container {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 2000;
+        }
+
+        .menu-icon {
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #222;
+            color: white;
+            padding: 20px;
+            transition: left 0.3s ease-in-out;
+            box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            z-index: 9999;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            background: #444;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .sidebar-link:hover {
+            background: #555;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <span class="menu-icon" onclick="toggleMenu()">☰</span>
+    </div>
+
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleMenu()">✖</button>
+        <a href="index.html" class="sidebar-link">🏡 Home</a>
+        <a href="study_tracker.html" class="sidebar-link">📖 Study Tracker</a>
+        <a href="study_timer.html" class="sidebar-link">📚 Study Timer</a>
+        <a href="useful_links.html" class="sidebar-link">🔗 Useful Links</a>
+    </div>
+
+    <h1>What are you doing, Shubham? <br>Remember who you are. <br>Remember what you're capable of. <br>Prove it. Grind.</h1>
+
+    <div id="countdown2026" class="timer"></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div id="countdown2026-progress" class="progress-bar"></div>
+    </div>
+
+    <!-- Warning Messages (Fixed Styling) -->
+    <p class="warning">Every 2.4 minutes wasted = 1 JEE Mains question you could have solved.</p>
+    <p class="warning">An hour wasted can push your rank down by 100+ spots.</p>
+    <p class="warning">JEE is a war. The more time you waste, the stronger your competition gets.</p>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("sidebar").classList.toggle("open");
+        }
+
+        function updateCountdown(id, targetDate) {
+            const startDate = new Date("2025-01-22T00:00:00").getTime();
+
+            function calculate() {
+                const now = new Date().getTime();
+                const timeLeft = targetDate - now;
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById(id).innerHTML = `JEE 2026 in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                const progress = ((now - startDate) / (targetDate - startDate)) * 100;
+                document.getElementById(id + "-progress").style.width = Math.max(progress, 0) + "%";
+
+                setTimeout(calculate, 1000);
+            }
+            calculate();
+        }
+
+        updateCountdown("countdown2026", new Date("2026-01-22T00:00:00").getTime());
+    </script>
+</body>
+</html>

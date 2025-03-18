@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useful Links</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.5s, color 0.5s;
+            text-align: center;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: auto; }
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #ff8c00, #ff3e6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .category { margin: 25px 0; padding: 20px; border-radius: 15px; background: rgba(0, 0, 0, 0.05); }
+        h2 { font-size: 24px; color: #ff3e6b; }
+        .links { list-style: none; padding: 0; }
+        .links a {
+            text-decoration: none; font-weight: bold; color: #007bff;
+            transition: color 0.3s, transform 0.2s;
+        }
+        .links a:hover { color: #ff6b6b; transform: scale(1.05); }
+        .sub-category {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .menu-container { position: fixed; top: 10px; left: 10px; z-index: 2000; }
+        .menu-icon { font-size: 2em; cursor: pointer; }
+        .sidebar {
+            position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
+            background: #222; color: white; padding: 20px;
+            transition: left 0.3s; box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.5);
+            overflow-y: auto; z-index: 9999;
+        }
+        .sidebar.open { left: 0; }
+        .close-btn {
+            background: red; color: white; border: none; padding: 5px 10px;
+            font-size: 1.2em; cursor: pointer; margin-bottom: 10px;
+        }
+        .sidebar-link {
+            display: block; padding: 10px; color: white; text-decoration: none;
+            font-size: 1.2em; margin-bottom: 10px; background: #444; border-radius: 5px;
+            text-align: center;
+        }
+        h3 { color: #ff8c00; }
+    </style>
+    <script>
+        function toggleMenu() {
+            document.getElementById("sidebar").classList.toggle("open");
+        }
+    </script>
+</head>
+<body>
+
+    <div class="menu-container">
+        <span class="menu-icon" onclick="toggleMenu()">☰</span>
+    </div>
+
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleMenu()">✖</button>
+        <a href="index.html" class="sidebar-link">🏡 Home</a>
+        <a href="study_tracker.html" class="sidebar-link">📖 Study Tracker</a>
+        <a href="study_timer.html" class="sidebar-link">📚 Study Timer</a>
+        <a href="useful_links.html" class="sidebar-link">🔗 Useful Links</a>
+    </div>
+
+    <div class="container">
+        <h1>📌 Useful Links</h1>
+
+        <div class="category">
+            <h2>📚 Study Resources</h2>
+            <ul class="links">
+                <li><a href="https://ncert.nic.in/">NCERT Books</a></li>
+                <li><a href="https://www.reddit.com/r/JEENEETards/wiki/">r/JEENEETards Wiki</a></li>
+                <li><a href="https://web.getmarks.app">GetMarks App</a></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>🎥 YouTube Channels</h2>
+            <ul class="links">
+                <li><a href="https://www.youtube.com/c/NehaAgrawalMathematicallyInclined">Neha Agrawal Mathematically Inclined</a></li>
+                <li><a href="https://www.youtube.com/c/EDUNITI">Eduniti</a></li>
+                <li><a href="https://www.youtube.com/c/VoraClasses">Vora Classes</a></li>
+                <li><a href="https://www.youtube.com/c/SimplyConcise">Simply Concise</a></li>
+                <li><a href="https://www.youtube.com/c/MathonGo">MathonGo</a></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>🎵 Music</h2>
+
+            <div class="sub-category" style="background: #ffebcc;">
+                <h3>🎼 Lofi Girl</h3>
+                <ul class="links">
+                    <li><a href="https://www.youtube.com/live/jfKfPfyJRdk?feature=shared">lofi hip hop radio 📚 - beats to relax/study to</a></li>
+                    <li><a href="https://www.youtube.com/live/28KRPhVzCus?feature=shared">lofi hip hop radio 💤 - beats to sleep/chill to</a></li>
+                    <li><a href="https://www.youtube.com/live/4xDzrJKXOOY?feature=shared">synthwave radio 🌌 - beats to chill/game to</a></li>
+                    <li><a href="https://youtu.be/lTRiuFIWV54?feature=shared">1 AM study session 📚</a></li>
+                </ul>
+            </div>
+
+            <div class="sub-category" style="background: #d9f7ff;">
+                <h3>🎧 White Noise</h3>
+                <ul class="links">
+                    <li><a href="https://www.youtube.com/live/-OekvEFm1lo?feature=shared">Gentle rain sounds 🌧</a></li>
+                    <li><a href="https://youtu.be/CHFif_y2TyM?feature=shared">Royal library 📖 - rain and thunderstorm sounds</a></li>
+                    <li><a href="https://youtu.be/4vIQON2fDWM?feature=shared">Library sounds 📚</a></li>
+                    <li><a href="https://youtu.be/nMfPqeZjc2c?feature=shared">White noise black screen 🔊</a></li>
+                </ul>
+            </div>
+
+            <div class="sub-category" style="background: #f0d9ff;">
+                <h3>🎶 Spotify Playlists</h3>
+                <ul class="links">
+                    <li><a href="https://open.spotify.com/playlist/4WFs0sBZJ9jMqPleAIfcKO">Liked songs 👍</a></li>
+                    <li><a href="https://open.spotify.com/playlist/1fyH76h185zPBkiCt3AFFo">Best songs of all time 👌</a></li>
+                    <li><a href="https://open.spotify.com/playlist/3WYmyXrEqRL1UnV3ep13ie">Energetic English songs 🔥</a></li>
+                    <li><a href="https://open.spotify.com/playlist/6RtESsqB6n63ZVrvTfbXY1">Motivation Hindi 💪</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
